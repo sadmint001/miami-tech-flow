@@ -1,16 +1,45 @@
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+
+const images = [
+  "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80",
+];
 
 const HeroSection = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#8B5CF6] to-[#0EA5E9] text-white relative overflow-hidden">
-      {/* Network background with overlay */}
-      <div 
-        className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80')] 
-        bg-cover bg-center bg-no-repeat opacity-20"
-      />
-      
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#8B5CF6] to-[#0EA5E9] text-white relative overflow-hidden pt-20">
+      {/* Image carousel with fade transition */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentImage}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.2 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000"
+            style={{ backgroundImage: `url('${images[currentImage]}')` }}
+          />
+        </motion.div>
+      </AnimatePresence>
+
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/70" />
       
@@ -49,11 +78,26 @@ const HeroSection = () => {
           >
             <Button
               size="lg"
-              className="bg-white text-[#8B5CF6] hover:bg-[#F97316] hover:text-white transition-all duration-300 text-lg px-8 py-6"
+              className="bg-white text-[#8B5CF6] hover:bg-[#F97316] hover:text-white transition-all duration-300 text-lg px-8 py-6 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               Explore Our Services
             </Button>
           </motion.div>
+
+          {/* Image indicators */}
+          <div className="flex justify-center gap-2 mt-12">
+            {images.map((_, index) => (
+              <motion.button
+                key={index}
+                className={`w-2 h-2 rounded-full ${
+                  currentImage === index ? "bg-white" : "bg-white/30"
+                }`}
+                onClick={() => setCurrentImage(index)}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
