@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,10 +62,9 @@ export default {
         "fade-up": "fade-up 0.5s ease-out",
         "fade-in": "fade-in 0.5s ease-out",
       },
-      fontFamily: {
-        'edwardian': ['Cormorant Garamond', 'serif'],
-      },
+      // Removed the fontFamily extension
     },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+

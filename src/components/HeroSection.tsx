@@ -54,7 +54,7 @@ const HeroSection = () => {
           className="text-center"
         >
           <motion.h1 
-            className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#F97316] to-[#D946EF] font-edwardian"
+            className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#F97316] to-[#D946EF]"
             initial={{ scale: 0.5 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
