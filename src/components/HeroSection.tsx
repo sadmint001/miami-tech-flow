@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 const images = [
-  "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80",
+  "/lovable-uploads/852b3a80-1f17-4b7c-9a71-9da476de9b2c.png",
+  "/lovable-uploads/051409d0-7763-4b90-881b-3decb6109f4f.png", 
+  "/lovable-uploads/920f801f-4e98-4033-b327-2bda50f99bc5.png",
+  "/lovable-uploads/65ab7436-b413-4162-a346-8cdb835a6d2f.png", // Newly added isometric tech image
 ];
 
 const HeroSection = () => {
