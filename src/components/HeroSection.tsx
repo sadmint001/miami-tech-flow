@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -16,7 +15,7 @@ const HeroSection = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 5000);
+    }, 10000); // Changed from 5000 to 10000 milliseconds (10 seconds)
 
     return () => clearInterval(timer);
   }, []);
@@ -105,4 +104,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
