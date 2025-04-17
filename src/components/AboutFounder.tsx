@@ -19,11 +19,11 @@ const AboutFounder = () => {
           <Card className="backdrop-blur-lg bg-white/90 dark:bg-gray-800/90 border-none shadow-xl">
             <CardContent className="p-8">
               <div className="flex flex-col items-center gap-8">
-                <Avatar className="w-48 h-48">
+                <Avatar className="w-48 h-48 overflow-hidden">
                   <AvatarImage 
-                    src="/lovable-uploads/e32b9498-f8a2-4c58-aee1-57fd4b4927ee.png" 
+                    src="/lovable-uploads/6bdcc69e-a53e-4988-b3ef-cb0e311ea10c.png" 
                     alt="Munga K. Francis" 
-                    className="object-cover object-center scale-110" 
+                    className="object-cover object-center w-full h-full scale-125" 
                   />
                 </Avatar>
                 <div className="flex-1 text-center">
