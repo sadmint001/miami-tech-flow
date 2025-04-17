@@ -1,3 +1,4 @@
+
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -6,7 +7,7 @@ const images = [
   "/lovable-uploads/852b3a80-1f17-4b7c-9a71-9da476de9b2c.png",
   "/lovable-uploads/051409d0-7763-4b90-881b-3decb6109f4f.png", 
   "/lovable-uploads/920f801f-4e98-4033-b327-2bda50f99bc5.png",
-  "/lovable-uploads/65ab7436-b413-4162-a346-8cdb835a6d2f.png", // Newly added isometric tech image
+  "/lovable-uploads/65ab7436-b413-4162-a346-8cdb835a6d2f.png", // Isometric tech image
 ];
 
 const HeroSection = () => {
@@ -21,7 +22,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#8B5CF6] to-[#0EA5E9] text-white relative overflow-hidden pt-20">
+    <section className="min-h-screen flex items-center justify-center hero-gradient text-white relative overflow-hidden pt-20 transition-all duration-300">
       {/* Image carousel with fade transition */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -40,7 +41,7 @@ const HeroSection = () => {
       </AnimatePresence>
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/70 dark:via-black/70 dark:to-black/90" />
       
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20" />
@@ -53,7 +54,7 @@ const HeroSection = () => {
           className="text-center"
         >
           <motion.h1 
-            className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#F97316] to-[#D946EF]"
+            className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#F97316] to-[#D946EF] dark:from-[#FF9D4D] dark:to-[#E67AFF]"
             initial={{ scale: 0.5 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -62,7 +63,7 @@ const HeroSection = () => {
           </motion.h1>
           
           <motion.p 
-            className="text-xl md:text-3xl mb-10 text-white max-w-3xl mx-auto font-light"
+            className="text-lg sm:text-xl md:text-3xl mb-10 text-white max-w-3xl mx-auto font-light"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -77,7 +78,7 @@ const HeroSection = () => {
           >
             <Button
               size="lg"
-              className="bg-white text-[#8B5CF6] hover:bg-[#F97316] hover:text-white transition-all duration-300 text-lg px-8 py-6 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="bg-white text-[#8B5CF6] hover:bg-[#F97316] hover:text-white transition-all duration-300 text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg hover:shadow-xl transform hover:-translate-y-1 dark:bg-white/90 dark:text-[#6D28D9]"
             >
               Explore Our Services
             </Button>
