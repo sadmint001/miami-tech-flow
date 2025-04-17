@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Wifi, Globe, Shield, Zap, Clock, Headset } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 const services = [
   {
@@ -31,26 +32,22 @@ const wifiPackages = [
   {
     speed: "5Mbps",
     price: "KSH 1000/=",
-    color: "bg-green-500",
-    textColor: "text-white",
+    color: "from-pink-500 to-purple-600",
   },
   {
     speed: "8Mbps",
     price: "KSH 1500/=",
-    color: "bg-orange-500",
-    textColor: "text-white",
+    color: "from-orange-400 to-pink-500",
   },
   {
     speed: "10Mbps",
     price: "KSH 1800/=",
-    color: "bg-pink-400",
-    textColor: "text-white",
+    color: "from-green-400 to-blue-500",
   },
   {
     speed: "15Mbps",
     price: "KSH 2000/=",
-    color: "bg-purple-500",
-    textColor: "text-white",
+    color: "from-purple-500 to-indigo-600",
   },
 ];
 
@@ -78,6 +75,18 @@ const childVariants = {
 };
 
 const ServicesSection = () => {
+  useEffect(() => {
+    // Add Raleway font for the 3D cards
+    const link = document.createElement('link');
+    link.href = "https://fonts.googleapis.com/css?family=Raleway:400,400i,700";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+    
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
       <div className="container mx-auto px-4">
@@ -129,42 +138,73 @@ const ServicesSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-12"
         >
-          <h3 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white">
+          <h3 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white font-raleway">
             WiFi Packages
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-50">
             {wifiPackages.map((pkg, index) => (
               <motion.div
                 key={pkg.speed}
                 initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                  transition: { duration: 0.2 }
+                whileInView={{ 
+                  opacity: 1, 
+                  scale: 1,
+                  transition: { 
+                    delay: index * 0.2,
+                    duration: 0.5
+                  }
                 }}
-                className={`rounded-2xl overflow-hidden ${pkg.color} relative`}
+                className="card-container perspective-50 mx-auto my-4"
               >
-                <div className="px-6 py-8 flex flex-col items-center">
-                  <Wifi className={`w-14 h-14 mb-6 ${pkg.textColor}`} />
-                  <h4 className={`text-4xl font-bold mb-2 ${pkg.textColor}`}>{pkg.speed}</h4>
-                  <p className={`text-2xl font-semibold ${pkg.textColor}`}>{pkg.price}</p>
+                <motion.div
+                  className="card-3d relative w-64 h-72 rounded-xl font-raleway"
+                  style={{ 
+                    transformStyle: "preserve-3d",
+                  }}
+                  initial={{ 
+                    rotateY: 30, 
+                    rotateX: 15 
+                  }}
+                  whileHover={{ 
+                    rotateY: -30, 
+                    rotateX: -15,
+                    transition: { duration: 1 }
+                  }}
+                >
+                  {/* Layered background for 3D effect */}
+                  <div className="layers absolute inset-0 -z-10" style={{ transformStyle: "preserve-3d" }}>
+                    {[...Array(5)].map((_, i) => (
+                      <div 
+                        key={i}
+                        className={`layer absolute inset-0 rounded-xl bg-gradient-to-br ${pkg.color} shadow-inner`}
+                        style={{ 
+                          transform: `translateZ(${i * -4}px)`,
+                          boxShadow: i === 4 ? "0 0 10px rgba(0,0,0,0.5), 0 0 5px rgba(0,0,0,0.3) inset" : "0 0 5px rgba(0,0,0,0.3) inset"
+                        }}
+                      />
+                    ))}
+                  </div>
                   
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="mt-6"
-                  >
-                    <Button variant="outline" className="bg-white/20 text-white hover:bg-white/30 border-none">
-                      Get Started
-                    </Button>
-                  </motion.div>
-                </div>
-                
-                <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-white/10"></div>
-                <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full bg-white/10"></div>
+                  {/* Card content */}
+                  <div className="relative z-10 p-8 flex flex-col items-center h-full justify-center text-white">
+                    <Wifi className="w-14 h-14 mb-6" />
+                    <h4 className="text-4xl font-bold mb-2">{pkg.speed}</h4>
+                    <p className="text-2xl font-semibold mb-6">{pkg.price}</p>
+                    
+                    <motion.div 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button 
+                        variant="outline" 
+                        className="bg-white/20 text-white hover:bg-white/30 border-none"
+                      >
+                        Get Started
+                      </Button>
+                    </motion.div>
+                  </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>

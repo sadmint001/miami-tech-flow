@@ -102,8 +102,23 @@
   .animation-delay-400 {
     animation-delay: 0.4s;
   }
+  
+  /* 3D card utilities */
+  .perspective-50 {
+    perspective: 50em;
+  }
+  
+  .font-raleway {
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  .card-3d {
+    transform-style: preserve-3d;
+  }
 }
 
 .hero-gradient {
   @apply bg-gradient-to-r from-purple-600/90 to-blue-500/90 dark:from-purple-900/90 dark:to-blue-800/90;
 }
+
+/* Update tailwind.config.ts to include the font */
